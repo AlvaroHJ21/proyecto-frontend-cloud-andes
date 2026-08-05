@@ -109,6 +109,9 @@ function LoginPage({ error, onLogin }) {
             Organiza tus pendientes, revisa tu avance y mantén tus tareas al día
             desde un solo lugar.
           </p>
+          <p className="mt-3 max-w-xl text-md leading-8 text-slate-300">
+            Proyecto desarrollado para ANDES.
+          </p>
         </section>
 
         <section className="rounded-2xl bg-white p-8 shadow-2xl shadow-blue-950/40">
