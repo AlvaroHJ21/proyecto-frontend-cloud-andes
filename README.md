@@ -38,6 +38,20 @@ npm run build
 Para la futura configuración de Amplify: instalación `npm ci`, construcción
 `npm run build`, salida `dist` y variable `VITE_API_URL` apuntando a la API HTTPS.
 
+El archivo `amplify.yml` guarda esa configuración dentro del repositorio. En la
+consola de Amplify se debe crear `VITE_API_URL` con una dirección como
+`https://api.ejemplo.com/api`, sin barra final. Vite incorpora su valor durante
+el build, por lo que cambiar la variable requiere iniciar un nuevo despliegue.
+
+| Parámetro de `amplify.yml` | Motivo |
+| --- | --- |
+| `version: 1` | Selecciona el formato de build reconocido por Amplify |
+| `preBuild` | Instala dependencias antes de compilar |
+| `npm ci` | Respeta exactamente `package-lock.json` |
+| `baseDirectory: dist` | Publica el directorio generado por Vite |
+| `files: "**/*"` | Incluye todos los recursos estáticos del build |
+| `cache.paths: .npm/**/*` | Reutiliza descargas de npm entre ejecuciones |
+
 El Dockerfile sirve el build con Nginx. Su configuración hace proxy de `/api/` al
 servicio `backend:3000`, por lo que está preparada para el Docker Compose de la
 carpeta de trabajo común. Amplify servirá los archivos estáticos de `dist`.

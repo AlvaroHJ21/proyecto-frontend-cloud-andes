@@ -1,0 +1,25 @@
+# Versión del formato de construcción que interpreta AWS Amplify Hosting.
+version: 1
+
+# El repositorio contiene una aplicación web estática construida con Vite.
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # Instala exactamente las versiones registradas en package-lock.json.
+        # .npm conserva paquetes descargados; prefer-offline reduce descargas posteriores.
+        - npm ci --cache .npm --prefer-offline
+    build:
+      commands:
+        # Comprueba TypeScript y genera los archivos estáticos de producción.
+        - npm run build
+  artifacts:
+    # Vite escribe el resultado que Amplify debe publicar en esta carpeta.
+    baseDirectory: dist
+    files:
+      # Publica todos los archivos y subdirectorios generados dentro de dist.
+      - "**/*"
+  cache:
+    paths:
+      # Mantiene la caché de npm entre construcciones; no contiene el código publicado.
+      - .npm/**/*
