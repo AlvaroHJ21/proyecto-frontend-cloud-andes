@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    // JavaScript moderno; DOM aporta los tipos del navegador y los formularios.
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    // Vite resuelve y empaqueta los módulos; TypeScript solo comprueba sus tipos.
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "isolatedModules": true,
+    // Usa la transformación JSX moderna de React.
+    "jsx": "react-jsx",
+    // Detecta parámetros sin tipo, valores nulos y errores capturados desconocidos.
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    // Permite imports compatibles con paquetes CommonJS usados por las herramientas.
+    "esModuleInterop": true,
+    // Mantiene el alias @ sincronizado con vite.config.ts.
+    "baseUrl": ".",
+    "paths": { "@/*": ["./src/*"] },
+    // Incluye las variables de Vite y las APIs Node que usa su configuración.
+    "types": ["vite/client", "node"]
+  },
+  // Comprueba todo el frontend y su configuración de Vite.
+  "include": ["src", "vite.config.ts"]
+}

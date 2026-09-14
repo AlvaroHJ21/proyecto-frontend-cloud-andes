@@ -1,2 +1,8 @@
+# Dependencias instaladas localmente; se reconstruyen desde package-lock.json.
 /node_modules
+# Archivos generados por Vite al construir el frontend.
+/dist
+# Configuración local; solo publicamos la plantilla sin secretos.
 .env
+.env.*
+!.env.example
