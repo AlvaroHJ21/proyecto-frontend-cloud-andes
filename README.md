@@ -3,10 +3,17 @@
 Interfaz React, TypeScript, Vite y Tailwind para iniciar sesión, administrar tareas y editar el perfil.
 Este repositorio se despliega de manera independiente del backend.
 
-## Arquitectura prevista
+## Arquitectura desplegada
 
-Navegador → frontend en AWS Amplify Hosting → API HTTPS en Elastic Beanstalk → MySQL en RDS.
-El despliegue en AWS está pendiente de configurar y verificar.
+Navegador → frontend en AWS Amplify Hosting → API Gateway HTTPS → Elastic
+Beanstalk → MySQL en RDS.
+
+- Frontend: https://alvarohj.tech
+- API: https://api.alvarohj.tech/api
+- Health check: https://api.alvarohj.tech/api/health
+
+API Gateway permite CORS desde el dominio raíz y `www`. Amplify incorpora
+`VITE_API_URL=https://api.alvarohj.tech/api` durante el build.
 
 ## Desarrollo local
 
@@ -35,8 +42,8 @@ un nuevo build. Las variables `VITE_` son públicas; no deben contener secretos.
 npm run build
 ```
 
-Para la futura configuración de Amplify: instalación `npm ci`, construcción
-`npm run build`, salida `dist` y variable `VITE_API_URL` apuntando a la API HTTPS.
+Amplify usa instalación `npm ci`, construcción `npm run build`, salida `dist` y
+la variable `VITE_API_URL` apuntando a la API HTTPS.
 
 El archivo `amplify.yml` guarda esa configuración dentro del repositorio. En la
 consola de Amplify se debe crear `VITE_API_URL` con una dirección como
@@ -69,7 +76,10 @@ Se comprobó el login en el navegador y la recuperación de sesión y tareas al
 recargar. Las operaciones de tareas y perfil también se probaron mediante la API
 pasando por el proxy de Nginx.
 
-URL pública de Amplify: pendiente.
+URL pública principal: https://alvarohj.tech
+
+También se verificó en AWS el flujo completo de autenticación y tareas contra RDS:
+crear, editar, completar y recuperar una tarea después de recargar la página.
 
 ## Componentes shadcn/ui
 
